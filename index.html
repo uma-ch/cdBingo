@@ -1,0 +1,135 @@
+<html>
+    <head>
+<style>
+    body {
+	background-color: mintcream;;
+    }
+    td,td {
+        border: 1px solid black;
+	background-color: white;
+        text-align: center;
+	font-size: larger;
+    }
+
+    table {
+        border: 1px solid black;
+	background-color: red;
+        width: 80%;
+        height: 60%;
+
+    }
+</style>
+
+        <script>
+            window.onload = init;
+
+            function filter_array(a){
+                    var b = []
+
+                    for ( i = 0; i<a.length;i++){
+                            if ( a[i]  !== undefined) {
+                                b.push(a[i])
+                            }
+                    }
+
+                    return b;
+            }
+
+            // Select num random elements from FROM numbers
+            function uniq_array(num, from){
+                var a = [];
+                for ( var i = 0; i < from; i++){
+                        a.push(i);
+                }
+
+                var ret = [];
+
+                for (var i = 0; i <= num; i++ ){
+                   var sel = Math.floor(Math.random() * a.length)
+                   ret.push(a[sel])
+                   delete a[sel]
+                   a = filter_array(a);
+                }
+
+                return ret;
+
+            }
+
+	function clear_element(elem){
+		while (elem.firstChild){
+			elem.removeChild(elem.firstChild);
+		}
+	}
+
+	function tbl(){
+                var table = document.getElementById('foo');
+
+		clear_element(table);
+
+		while (table.firstChild){
+			table.removeChild(table.firstChild);
+		}
+
+                var str_bingo = ["Pandemic",
+                         "COVID",
+                        "100+ Fahrenheit",
+                        "Wildfires",
+                        "Thunderstorms",
+                        "Power outages",
+			"Drought",
+			"Earthquake",
+                        "Trump as president",
+			"Floods",
+                        "Sky burning up",
+                        "Ashes falling down",
+			"Murder hornets",
+			"Running out of TP",
+			"Travel ban",
+			"Remote working",
+		];
+
+                var dim = 4
+
+                var b = uniq_array(dim*dim,str_bingo.length);
+                var cnt = 0;
+
+                for ( i = 0; i < dim; i++){
+                    var tr = document.createElement('tr')
+                    table.appendChild(tr);
+
+                    for ( j = 0; j < dim; j++){
+                        var td = document.createElement('td');
+                        tr.appendChild(td);
+
+                        var sel = Math.random() * 6.0
+                        td.innerHTML = str_bingo[b[cnt++]];
+                    }
+                }
+	}
+
+	function init() {
+		tbl();
+	}
+        </script>
+    </head>
+
+    <body>
+        <h1>California Disaster Bingo</h1>
+        <table id="foo"> </table>
+
+	<p>
+	<a href="#" onClick="tbl()">Refresh</a>
+	</p>
+
+	<p>
+	Rules for the bingo is pretty straight forward. Print this to pdf, cut
+	out, and for each of the natural disasters you experience cross out the
+	square. If you manage to get bingo, you win.... I guess..
+	</p>
+
+	<p>
+	if you feel that there are some disasters missing tweet me @mrLangly
+	</p>
+    </body>
+</html>
+
